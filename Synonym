@@ -1,0 +1,30 @@
+	//input: a string such as USA
+	//output: an array of the sysnonym words
+	
+	public static String[] Synonyms(String text) throws IOException {
+		String wnhome = "/usr/local/WordNet-3.0/";
+		String path = wnhome + File.separator + "dict";
+		URL url  = new URL ("file", null, path);
+		IDictionary dict = new Dictionary(url);
+		dict.open();
+		IIndexWord idxWord = dict.getIndexWord("USA", POS.NOUN);
+		//getting the default meaning of the word (the index 0 represent the first sense of the word
+		IWordID wordID = idxWord.getWordIDs().get(0);
+		IWord word = dict.getWord(wordID);
+		//getting synonyms
+		ISynset synset = word.getSynset();
+		int array_counter = 0;
+		for (IWord w : synset.getWords()){
+			array_counter +=1;
+		}
+		String[] SynArray = new String[array_counter];
+		int i=0;
+		for (IWord w : synset.getWords()){
+			SynArray[i]=w.getLemma();
+			i +=1;
+		}
+		for ( i=0; i<array_counter;i++){
+			SynArray[i]=SynArray[i].replaceAll("_", " ");
+		}		
+		return SynArray;
+	}
