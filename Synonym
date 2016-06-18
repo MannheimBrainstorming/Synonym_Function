@@ -1,6 +1,21 @@
 	//input: a string such as USA
 	//output: an array of the sysnonym words
+	import java.io.File;
+	import java.io.IOException;
+	import java.net.URL;
+	import java.util.Iterator;
+	import java.util.List;
 	
+	import edu.mit.jwi.Dictionary;
+	import edu.mit.jwi.IDictionary;
+	import edu.mit.jwi.item.IIndexWord;
+	import edu.mit.jwi.item.ISynset;
+	import edu.mit.jwi.item.ISynsetID;
+	import edu.mit.jwi.item.IWord;
+	import edu.mit.jwi.item.IWordID;
+	import edu.mit.jwi.item.POS;
+	import edu.mit.jwi.item.Pointer;
+
 	public static String[] Synonyms(String text) throws IOException {
 		String wnhome = "/usr/local/WordNet-3.0/";
 		String path = wnhome + File.separator + "dict";
